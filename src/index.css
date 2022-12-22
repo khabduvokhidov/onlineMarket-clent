@@ -1,3 +1,24 @@
+*::-webkit-scrollbar {
+  background: #fff;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  background: rgb(193, 193, 193);
+}
+
+:root {
+  --primary-color: #fff;
+  --secondary-color: #000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +31,36 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.container {
+  width: min(100% - 12px, 1440px);
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.dis-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  padding: 60px 0;
+}
+
+section:nth-of-type(odd) {
+  background: rgb(250, 250, 250);
 }

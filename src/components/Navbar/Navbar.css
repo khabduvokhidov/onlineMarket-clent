@@ -1,0 +1,41 @@
+/* Navbar Start */
+.nav {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(50px);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  padding: 25px 0;
+}
+
+.nav__container {
+  justify-content: space-between;
+}
+
+.nav__logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.nav__menu {
+  gap: 50px;
+}
+
+.nav__list {
+  gap: 25px;
+}
+
+.nav__icon {
+  font-size: 20px;
+  color: var(--primary-color);
+}
+
+.nav__btn {
+  border: 1px solid #fff;
+  border-radius: 4px;
+  padding: 8px 16px;
+  color: var(--primary-color);
+  font-size: 20px;
+}
+/* Navbar End */

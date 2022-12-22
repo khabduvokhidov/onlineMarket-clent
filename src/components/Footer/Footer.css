@@ -1,0 +1,18 @@
+/* Footer Start */
+.footer {
+  background: rgb(39, 38, 48);
+  padding: 40px 0;
+}
+
+.footer__info {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer__link,
+.footer__txt,
+.footer__contact {
+  color: #fff;
+  font-size: 20px;
+}
+/* Footer End */
