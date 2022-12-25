@@ -1,11 +1,12 @@
 /* Navbar Start */
 .nav {
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(6, 35, 62, 0.55);
   backdrop-filter: blur(50px);
   position: sticky;
   top: 0;
   z-index: 99;
-  padding: 25px 0;
+  padding: 30px 0;
+  border-bottom: 2px solid #fff;
 }
 
 .nav__container {
@@ -23,7 +24,7 @@
 }
 
 .nav__list {
-  gap: 25px;
+  gap: 24px;
 }
 
 .nav__icon {

@@ -1,0 +1,14 @@
+/* Products Start */
+.products__title {
+  margin-bottom: 60px;
+  font-size: 36px;
+  text-align: center;
+  font-family: 'Montserrat';
+}
+
+.products__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 20px;
+}
+  /* Products End */

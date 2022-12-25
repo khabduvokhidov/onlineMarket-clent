@@ -72,6 +72,7 @@
 
 .tabs__label {
   color: #979797;
+  position: relative;
 }
 
 .tabs__input {
@@ -91,6 +92,15 @@
 
 .tabs__input:focus {
   border: 1px solid #004267;
+}
+
+.tabs__btn-icon {
+  width: max-content;
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  cursor: pointer;
+  z-index: 9;
 }
 
 .tabs__select {
@@ -122,7 +132,6 @@
 /* Responsive */
 @media (max-width: 1024px) {
   .tabs {
-    padding: 100px 0 180px;
     position: relative;
     text-align: center;
   }
@@ -155,7 +164,7 @@
 
 @media (max-width: 480px) {
   .tabs__title {
-    padding: 15px;
+    padding: 14px;
     font-size: 16px;
   }
 
