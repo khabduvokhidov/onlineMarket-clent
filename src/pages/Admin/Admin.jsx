@@ -1,23 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ToastContainer, toast } from 'react-toastify'
-import { logIn, signUp } from '../../api/registerRequest';
 
-import 'react-toastify/dist/ReactToastify.css';
+import { signUp } from '../../api/registerRequest'
+import Operators from '../../components/Operators/Operators'
+import { useInfoContext } from '../../context/InfoContext'
 
-import { useInfoContext } from '../../context/InfoContext';
-
-import "./Register.css";
-
-export default function Register() {
-  // register tab
-  const [toggleState, setToggleState] = useState(1);
-  const toggleTab = (index) => {
-    setToggleState(index);
-  }
-
+export default function Admin() {
   // show password
   const [password, setPassword] = useState(false)
   const showPassword = (e) => {
@@ -31,48 +21,43 @@ export default function Register() {
     email: "",
     password: "",
     confirmpass: "",
+    role: "",
     phone: ""
   }
 
-  const navigate = useNavigate()
-  const [isSignUp, setIsSignUp] = useState(false)
   const { setUser, loading, setLoading } = useInfoContext()
+
   const [confirmPass, setConfirmPass] = useState(true)
+
   const [data, setData] = useState(initialState)
+
+  // react toastify
+  const showToastMessage = () => {
+    toast.success("Ro'yxatdan O'tish Muvaffaqiyatli Amalga Oshdi!", {
+      position: toast.POSITION.TOP_RIGHT
+    })
+  }
+
+  //reset form
+  const resetForm = () => {
+    setData(initialState)
+    setConfirmPass(confirmPass)
+  }
 
   // sign up
   const signUpUser = async () => {
     try {
       setLoading(true)
       const res = await signUp(data)
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('profile', JSON.stringify(res.data.newUser))
       setUser(res.data.newUser)
-      toast.success(res.data.message)
-      navigate("/")
+      console.log(res);
+      showToastMessage()
+      resetForm()
       setLoading(false)
     } catch (error) {
       setLoading(false)
       console.log(error);
-      toast.error(error.response.data.message)
-    }
-  }
-
-  // login
-  const logInUser = async () => {
-    try {
-      setLoading(true)
-      const res = await logIn(data)
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('profile', JSON.stringify(res.data.user))
-      setUser(res.data.user)
-      toast.success(res.data.message)
-      setLoading(false)
-      navigate("/")
-    } catch (error) {
-      setLoading(false)
-      console.log(error)
-      toast.error(error.response.data.message)
+      alert(error.response.data.message)
     }
   }
 
@@ -85,17 +70,13 @@ export default function Register() {
   const handleSubmitForm = async (e) => {
     setConfirmPass(true)
     e.preventDefault()
-    if (toggleState === 1) {
-      data.confirmpass === data.password ? signUpUser() : setConfirmPass(false)
-    } else {
-      logInUser()
+    try {
+      if (data.confirmpass === data.password ) {
+        return signUpUser
+      }
+    } catch (error) {
+      toast.error(error.message)
     }
-  }
-
-  //reset form
-  const resetForm = () => {
-    setData(initialState)
-    setConfirmPass(confirmPass)
   }
 
   return (
@@ -106,23 +87,15 @@ export default function Register() {
 
             <div className="tabs__blocks">
 
-              <h2
-                className={toggleState === 1 ? 'tabs__title active' : 'tabs__title'}
-                onClick={() => toggleTab(1)}>
-                Ro’yxatdan O’tish
-              </h2>
-
-              <h2
-                className={toggleState === 2 ? 'tabs__title active' : 'tabs__title'}
-                onClick={() => toggleTab(2)}>
-                Tizimga Kirish
+              <h2 className='tabs__title active' style={{ width: "100%", cursor: "default" }}>
+                Operator/Foydalanuvchilarni Ro’yxatdan O’tkazish
               </h2>
 
             </div>
 
             <div className="tabs__contents">
 
-              <div className={toggleState === 1 ? 'tabs__content active' : 'tabs__content'}>
+              <div className='tabs__content active'>
 
                 <form className="tabs__form" onSubmit={handleSubmitForm}>
 
@@ -161,7 +134,7 @@ export default function Register() {
                       type="number"
                       name='phone'
                       id="phone"
-                      placeholder='998901234567'
+                      placeholder='99 878 12 12'
                       className='tabs__input'
                       value={data.phone}
                       onChange={handleInput}
@@ -188,7 +161,7 @@ export default function Register() {
                       required
                       type={password ? "text" : "password"}
                       name='password'
-                      id="signUpPassword"
+                      id="adminPassword"
                       placeholder='12345678'
                       className='tabs__input'
                       autoComplete='false'
@@ -217,61 +190,38 @@ export default function Register() {
                     </button>
                   </label>
 
-                  <div>
-                    <span style={{display: confirmPass ? "none" : "block"}} className="confirm_span" >
-                      *parolingiz bir hil emas
-                    </span>
-                    
-                    
-                    <button type="submit" className="tabs__btn" disabled={loading}>
-                      {loading ? "Kuting..." : toggleState === 1 && "Ro'yxatdan O'tish"}
-                    </button>
-                  </div>
+                  <h4>Rolingizni tanlang:</h4>
 
-                </form>
-              </div>
+                  <label htmlFor="user" className="tabs__label">
+                    user
+                    <input
+                      type="radio"
+                      name='role'
+                      id="user"
+                      value="user"
+                      className="tabs__radio"
+                      onChange={handleInput}
+                    />
+                  </label>
 
-              <div className={toggleState === 2 ? 'tabs__content active' : 'tabs__content'}>
-
-                <form className="tabs__form" onSubmit={handleSubmitForm}>
-
-                  <label className='tabs__label' htmlFor="logInEmail">
-                    E-mail:
+                  <label htmlFor="operator" className="tabs__label">
+                    operator
                     <input
                       required
-                      type="email"
-                      name='email'
-                      id="logInEmail"
-                      placeholder='username24@gmail.com'
-                      className='tabs__input'
-                      value={data.email}
+                      type="radio"
+                      name='role'
+                      id="operator"
+                      value="operator"
+                      className="tabs__radio"
                       onChange={handleInput}
                     />
                   </label>
 
-                  <label className='tabs__label' htmlFor="logInPassword">
-                    Joriy parolingiz:
-                    <input
-                      onChange={handleInput}
-                      type={password ? "text" : "password"}
-                      name='password'
-                      value={data.password}
-                      id="logInPassword"
-                      placeholder='password'
-                      required className='tabs__input'
-                      autoComplete='false'
-                    />
-                    <button className="tabs__btn-icon" onClick={showPassword}>
-                      <FontAwesomeIcon icon={password ? faEyeSlash : faEye} className="tabs__icon" />
-                    </button>
-                  </label>
-
-                  <button type="submit" disabled={loading} className="tabs__btn">
-                    {loading ? "Kuting..." : toggleState === 2 && "Kirish"}
+                  <button type="submit" className="tabs__btn" disabled={loading}>
+                    {loading ? "Kuting..." : "Ro'yxatdan O'tish"}
                   </button>
-
+                
                 </form>
-
               </div>
 
             </div>
@@ -280,6 +230,7 @@ export default function Register() {
         </div>
       </section>
       <ToastContainer />
+      <Operators />
     </>
   )
 }

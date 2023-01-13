@@ -118,7 +118,7 @@ const InfoContextProvider = ({
     orders,
     setOrders,
     delivered,
-    setDeliveredgit merge registe
+    setDelivered
   }
 
   return (

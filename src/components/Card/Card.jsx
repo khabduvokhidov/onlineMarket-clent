@@ -1,43 +1,111 @@
 import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+
 import "./Card.css";
-import { faCaretDown, faCaretUp, } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Gaz from '../../img/plita.jpg';
+import { useInfoContext } from "../../context/InfoContext";
+import { deleteProducts } from "../../api/productRequest";
 
-function Card() {
-  const [count, setCount] = useState(0)
+function Card({ data }) {
+  const params = useParams()
 
-  const countPlus = () => {
-    setCount(count + 1)
+  const {
+    user,
+    loading,
+    setLoading,
+    productLoading,
+    setProductLoading
+  } = useInfoContext()
+
+  const showToastMessage = () => {
+    toast.success("Mahsulot o'chirildi!", {
+      position: toast.POSITION.TOP_RIGHT
+    })
   }
 
-  const countMinus = () => {
-    setCount(count - 1)
+  const showToastError = () => {
+    toast.error("Qaytadan urinib ko'ring!", {
+      position: toast.POSITION.TOP_RIGHT
+    });
+  }
+
+  const deleteCard = async () => {
+    try {
+      setLoading(true)
+      if (params.id) {
+        return params.id === data._id
+      }
+      await deleteProducts(data._id)
+      showToastMessage()
+      setLoading(false)
+      setProductLoading(!productLoading)
+    } catch (error) {
+      setLoading(false)
+      console.log(error);
+      alert("Sahifani yangilang!")
+      // showToastError()
+    }
   }
 
   return (
-    <div className="card">
-      <div class="card__header">
-        <img src={Gaz} alt="item" class="card__img" />
-        <p class="card__desc">Gaz Plita 2022</p>
-      </div>
-      <div class="card__body dis-flex">
-        <span class="card__span">Narxi:</span>
-        <h3 class="card__price">3.000.000 so'm</h3>
-      </div>
-      <div class="card__footer">
-        <button class="card__btn">$ Add to cart</button>
-      </div>
-      {/* <img width='100%' src={Gaz} alt="Sneakers" />
-      <h5>Gaz Plita</h5>
-      <div className="d-flex justify-between align-center">
-        <div className="d-flex flex-column">
-          <span>Цена:</span>
-          <b>1234 руб.</b>
+    <>
+      <div className="product__box">
+        <div className="card">
+          <div className="card__header">
+
+            <img src={data?.image.url} alt="product" className="card__img" />
+
+            <h3 className="card__title">{data?.name}</h3>
+
+          </div>
+
+          <div className="card__body">
+
+            <div className="card__price-box dis-flex">
+              <span className="card__span">Narxi:</span>
+              <h3 className="card__price">{data?.price} UZS</h3>
+            </div>
+
+            <p className="card__desc">{data?.desc}</p>
+
+          </div>
+
+          <div className="card__footer">
+
+            
+            
+          <Link to={`/product/products/one/${data?._id}`} className="card__btn">
+            Buyurtma Berish
+          </Link>
+
+            {
+              user?.role === "admin" &&
+              <button disabled={loading} onClick={deleteCard} id={data._id} className={"card__del-btn"}>
+                 Delete
+              </button>
+            }
+
+          </div>
         </div>
-      </div> */}
-    </div>
-  )
+
+        {
+          user?.role === "admin" && (
+            <div className="card__operator">
+              <h3 className="operator__name">
+                <span className="operator__span">Mahsulot Egasi</span> {data?.operatorId?.firstname}
+              </h3>
+              {/* {
+                user?.role !== "admin" && ( */}
+              <p className="operator__phone">+998{data?.operatorId?.phone}</p>
+              {/* )
+              } */}
+            </div>
+          )
+        }
+        <ToastContainer />
+      </div>
+    </>
+  );
 }
 
 export default Card;

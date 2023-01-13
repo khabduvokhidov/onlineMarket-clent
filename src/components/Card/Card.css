@@ -2,10 +2,13 @@
 .card {
   border: 1px solid #f3f3f3;
   border-radius: 8px;
-  width: 300px;
   padding: 20px;
+  height: 520px;
   background: #fff;
   box-shadow: 0 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   transition: box-shadow 0.25s ease-in-out, transform 0.25s ease-in-out;
 }
 
@@ -14,18 +17,25 @@
   transform: translateY(-5px);
 }
 
+.card:hover~.card__operator {
+  transform: translateY(-5px);
+}
+
 .card__header {
   border-radius: 8px;
   overflow: hidden;
-  object-fit: cover;
   position: relative;
+}
+
+.card__img {
+  height: 272px;
 }
 
 .card__header:hover .card__img {
   transform: scale(1.075);
 }
 
-.card__header:hover .card__desc {
+.card__header:hover .card__title {
   opacity: 0;
 }
 
@@ -33,7 +43,7 @@
   transition: .5s;
 }
 
-.card__desc {
+.card__title {
   width: 100%;
   height: 50%;
   padding: 8px;
@@ -49,13 +59,13 @@
 }
 
 .card__body {
-  padding: 25px 0;
-  justify-content: space-between;
-  /* column-gap: 20px; */
+  padding: 20px 0;
 }
 
-.card__price {
-  color: var(__primary-color);
+.card__price-box {
+  padding: 20px 0;
+  justify-content: space-between;
+  column-gap: 20px;
 }
 
 .card__span {
@@ -66,14 +76,74 @@
   font-size: 16px;
 }
 
+.card__desc {
+  height: 42px;
+  overflow: auto;
+}
+
 .card__btn {
-  border: none;
+  border: 2px solid rgb(255, 255, 255);
   border-radius: 6px;
   width: 100%;
   padding: 12px 0;
-  font-size: 18px;
+  display: block;
   color: #fff;
-  background: #004267;
+  font-size: 18px;
+  background: rgba(5, 29, 51, 0.7);
+  backdrop-filter: blur(50px);
+  cursor: pointer;
+  transition: .5s;
+  text-align: center;
+}
+
+.card__btn:hover {
+  border: 2px solid rgb(66, 117, 153);
+  background: rgb(18, 65, 109);
+}
+
+.card__icon {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.card__del-btn {
+  border: 2px outset #e61b1b;
+  border-radius: 6px;
+  width: 100%;
+  padding: 18px 0;
+  color: #fff;
+  background: #e61b1b;
+  text-transform: uppercase;
   cursor: pointer;
 }
+
+.deleteDisabled {
+  border: 2px solid #e61b1b;
+  border-radius: 6px;
+  width: 100%;
+  padding: 18px 0;
+  color: #fff;
+  background: grey;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.card__del-btn:active {
+  border: 2px inset #e61b1b;
+}
+
+.card__operator {
+  border: 1px solid #f3f3f3;
+  border-radius: 8px;
+  padding: 20px;
+  background: #fff;
+  text-align: center;
+  transition: box-shadow 0.25s ease-in-out, transform 0.25s ease-in-out;
+}
+
+.operator__span {
+  font-weight: 400;
+}
+
+
 /* Card End */

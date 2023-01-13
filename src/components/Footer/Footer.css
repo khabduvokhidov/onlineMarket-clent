@@ -7,12 +7,39 @@
 .footer__info {
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 20px;
 }
 
-.footer__link,
+.footer__link {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.footer__txt {
+  text-align: center;
+}
+
 .footer__txt,
 .footer__contact {
-  color: #fff;
+  color: var(--primary-color);
   font-size: 20px;
 }
+
+.footer__icon {
+  transition: .5s;
+}
+
+.footer__contact:hover .footer__icon {
+  transform: rotate(-30deg);
+}
 /* Footer End */
+
+
+/* Media Start */
+@media (max-width: 768px) {
+  .footer__info {
+    flex-direction: column;
+  }
+}
+/* Media End */
