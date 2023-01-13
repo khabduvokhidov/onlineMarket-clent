@@ -1,12 +1,12 @@
 /* Navbar Start */
 .nav {
+  border-bottom: 2px solid #fff;
   background: rgba(6, 35, 62, 0.55);
   backdrop-filter: blur(50px);
+  padding: 30px 0;
   position: sticky;
   top: 0;
   z-index: 99;
-  padding: 30px 0;
-  border-bottom: 2px solid #fff;
 }
 
 .nav__container {
@@ -21,22 +21,145 @@
 
 .nav__menu {
   gap: 50px;
+  justify-content: space-between;
 }
 
+.nav__contacts,
 .nav__list {
   gap: 24px;
 }
 
-.nav__icon {
-  font-size: 20px;
+.nav__link,
+.nav__icon,
+.nav__btn {
   color: var(--primary-color);
+  font-size: 20px;
+}
+
+.nav__link {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.nav__link::before {
+  content: '';
+  width: 0;
+  height: 1px;
+  background: #fff;
+  position: absolute;
+  bottom: -3px;
+  transition: .6s;
+}
+
+.nav__link:hover::before {
+  width: 100%;
+}
+
+.nav__firstname {
+  color: #fff;
+  font-weight: 500;
 }
 
 .nav__btn {
-  border: 1px solid #fff;
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
   padding: 8px 16px;
-  color: var(--primary-color);
-  font-size: 20px;
 }
 /* Navbar End */
+
+.mantine-qo1k2 {
+  height: unset;
+}
+
+/* Media Start */
+@media (max-width: 1024px) {
+  .nav__burger {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    visibility: visible;
+    cursor: pointer;
+    z-index: 9;
+  }
+  
+  .nav__burger-line {
+    width: 100%;
+    height: 1.5px;
+    background: #fff;
+    position: relative;
+    transition: .5s;
+  }
+  
+  .nav__burger-line::before,
+  .nav__burger-line::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    transition: .5s;
+  }
+  
+  .nav__burger-line::before {
+    top: -10px;
+  }
+  
+  .nav__burger-line::after {
+    top: 10px;
+  }
+  
+  .nav__burger.active .nav__burger-line {
+    background: transparent;
+  }
+  
+  .nav__burger.active .nav__burger-line::before {
+    transform: rotate(42deg) translateY(13px);
+  }
+  
+  .nav__burger.active .nav__burger-line::after {
+    transform: rotate(-42deg) translateY(-13px);
+  }
+  
+  .nav__menu {
+    border-left: 2px solid #fff;
+    width: max-content;
+    height: 100vh;
+    padding: 0 20px;
+    background: rgba(6, 35, 62, 0.55);
+    justify-content: center;
+    gap: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: .5s;
+  }
+  
+  .nav__list,
+  .nav__contacts,
+  .nav__menu {
+    flex-direction: column;
+  }
+  
+  .nav__burger.active ~ .nav__menu {
+    visibility: visible;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 992px) {
+  .nav__link,
+  .nav__icon,
+  .nav__btn {
+    font-size: 18px;
+  }
+  
+  .nav__btn {
+    padding: 6px 12px;
+  }
+}
+/* Media End */

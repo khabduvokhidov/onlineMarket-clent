@@ -7,31 +7,40 @@
 
 /* Items Start */
 .items__title {
-  text-align: center;
   margin-bottom: 60px;
-  font-size: 36px;
-  font-family: 'Montserrat';
+  color: var(--secondary-color);
+  text-align: center;
+  font-size: calc(24px + 24 * (100vw / 1920));
 }
 
 .cards {
   margin: 30px 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 30px;
+}
+
+.slick-slider .slick-arrow {
+  display: none !important;
+}
+
+.slick-slide {
+  padding: 20px 0;
+}
+
+.slick-slide>div {
+  margin: 0 10px;
 }
 
 .items__link {
-  width: max-content;
   border: 1px solid;
   border-radius: 8px;
+  width: max-content;
   margin: 0 auto;
-  padding: 16px 36px;
+  padding: 16px 32px;
+  color: #fff;
+  background: var(--secondary-color);
   display: flex;
   align-items: center;
   column-gap: 16px;
-  background: #004267;
-  color: #fff;
-  font-size: 20px;
+  font-size: calc(10px + 10 * (100vw / 1920));
 }
 
 .link__icon {
@@ -63,8 +72,8 @@
 }
 
 .about__title {
-  font-size: 28px;
-  color: #004267;
+  font-size: calc(24px + 20 * (100vw / 1920));
+  color: var(--secondary-color);
   text-align: center;
 }
 
@@ -73,3 +82,45 @@
   text-indent: 20px;
 }
 /* About End */
+
+
+/* Media Start */
+@media (max-width: 1440px) {}
+@media (max-width: 1320px) {}
+@media (max-width: 1290px) {}
+@media (max-width: 1140px) {}
+@media (max-width: 1024px) {
+  .items__link {
+    border-radius: 6px;
+    padding: 12px 24px;
+  }
+}
+@media (max-width: 992px) {}
+@media (max-width: 850px) {}
+@media (max-width: 768px) {
+  .items__title {
+    font-size: calc(24px + (24 + 24 * 0.7) * (100vw - 320px) / 1920);
+  }
+
+  .items__link {
+    font-size: calc(10px + (10 + 10 * 0.7) * (100vw - 320px) / 1920);
+  }
+
+  .about__title {
+    font-size: calc(24px + (20 + 20 * 0.7) * (100vw - 320px) / 1920);
+  }
+}
+@media (max-width: 684px) {}
+@media (max-width: 667px) {}
+@media (max-width: 576px) {}
+@media (max-width: 480px) {}
+@media (max-width: 414px) {}
+@media (max-width: 412px) {}
+@media (max-width: 375px) {}
+@media (max-width: 360px) {
+  .items__link {
+    padding: 8px 16px;
+  }
+}
+@media (max-width: 320px) {}
+/* Media End */

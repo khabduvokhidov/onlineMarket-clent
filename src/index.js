@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import InfoContextProvider from './infoContext/InfoContext';
+import InfoContextProvider from './context/InfoContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
