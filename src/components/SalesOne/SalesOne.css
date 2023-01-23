@@ -1,0 +1,25 @@
+/* Sales One Start */
+.salesOne__card--label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.salesOne__card--input {
+  margin-left: 12px;
+}
+
+.salesOne__card--btn {
+  border: 2px outset var(--secondary-color);
+  border-radius: 6px;
+  padding: 12px 0;
+  width: 100%;
+  color: #fff;
+  background: var(--secondary-color);
+  text-align: center;
+  cursor: pointer;
+}
+
+.salesOne__card--btn:active {
+  border: 2px inset var(--secondary-color);
+}
+/* Sales One End */

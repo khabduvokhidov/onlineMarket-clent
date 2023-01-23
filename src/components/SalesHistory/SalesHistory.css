@@ -1,19 +1,6 @@
 /* Order Start */
-.order__cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.order__card {
-  border: 1px solid #f3f3f3;
-  border-radius: 8px;
-  padding: 20px;
-  height: 450px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  box-shadow: 0 0 4px 6px rgba(0, 0, 0, 0.05);
+.order__link {
+  width: 100%;
 }
 
 .order__figure {
@@ -23,19 +10,5 @@
 
 .order__img {
   height: 200px;
-}
-
-.order__del-btn {
-  border: 2px outset #e61b1b;
-  border-radius: 6px;
-  padding: 12px 0;
-  color: #fff;
-  background: #e61b1b;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.order__del-btn:active {
-  border: 2px inset #e61b1b;
 }
 /* Order End */

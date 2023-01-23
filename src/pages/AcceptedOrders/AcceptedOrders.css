@@ -1,0 +1,21 @@
+/* Acceprted Orders Start */
+.acceptedOrders__card--input {
+  margin-left: 12px;
+}
+
+.acceptedOrders__card--btn {
+  border: 2px outset var(--secondary-color);
+  border-radius: 6px;
+  margin: 12px 0;
+  padding: 12px 0;
+  width: 100%;
+  color: #fff;
+  background: var(--secondary-color);
+  text-align: center;
+  cursor: pointer;
+}
+
+.acceptedOrders__card--btn:active {
+  border: 2px inset var(--secondary-color);
+}
+/* Acceprted Orders End */

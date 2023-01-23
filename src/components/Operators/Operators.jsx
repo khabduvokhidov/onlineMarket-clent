@@ -18,51 +18,58 @@ export default function Operators() {
     })
   }
 
+  const showToastSuccess = () => {
+    toast.success("Operator o'chirildi!", {
+      position: toast.POSITION.TOP_RIGHT
+    })
+  }
+
   const deleteUser = async (e) => {
     try {
       setLoading(true)
       const res = await delUser(e.target.id)
       setProductLoading(!productLoading)
-      toast.success(res.data.message)
+      showToastSuccess()
       setLoading(false)
     } catch (error) {
       setLoading(false)
-      showToastError()  
+      showToastError()
       console.log(error);
     }
   }
   return (
-    <section className="operators">
-      <div className="container">
-        <div className="operators__cards">
-          {
-            operators?.map((operator, id) => {
-              return (
-                <div className="operators__card" key={id}>
-                  {/* <Link to="/" className='operator_smile'> */}
-                  <div className="operator__header">
-                    <FontAwesomeIcon icon={faHeadset} className="operator__icon" />
-                  </div>
-                  <div className="operator__body">
-                    <h3 className="operator__name">
-                      {operator?.lastname} {operator?.firstname} <span className="operator__span">{operator?.role}</span>
-                    </h3>
-                    <p className="operator__mail">{operator?.email}</p>
-                    <p className="operator__phone">+998{operator?.phone}</p>
-                  </div>
-                  <div className="operator__footer">
-                    <Link to={`product/products/${operator._id}`} className="operator__btn">Qo'shgan mahsulotlari</Link>
+    <>
+      <section className="operators">
+        <div className="container">
+          <h2 className="operators__title title">barcha operatorlar</h2>
+          <div className="operators__cards cards">
+            {
+              operators?.map((operator, id) => {
+                return (
+                  <div className="operators__card card" key={id}>
+                    <div className="operator__header card__header">
+                      <FontAwesomeIcon icon={faHeadset} className="operator__icon" />
+                    </div>
+                    <div className="operator__body card__body">
+                      <h3 className="operator__name">
+                        {operator?.lastname} {operator?.firstname} <span className="operator__span">{operator?.role}</span>
+                      </h3>
+                      <p className="operator__mail">{operator?.email}</p>
+                      <p className="operator__phone">+998{operator?.phone}</p>
+                    </div>
+                    <div className="operator__footer card__footer">
+                      <Link to={`salesHis/saleshstory/operators/${operator._id}`} className="operator__btn">Sotgan Mahsulotlari</Link>
 
-                    <button onClick={deleteUser} id={operator._id} className="operator__del-btn">Delete</button>
+                      <button onClick={deleteUser} id={operator._id} className="operator__del-btn del-btn">Delete</button>
+                    </div>
                   </div>
-                  {/* </Link> */}
-                </div>
-              )
-            })
-          }
+                )
+              })
+            }
+          </div>
         </div>
-        <ToastContainer />
-      </div>
-    </section>
+      </section>
+      <ToastContainer />
+    </>
   )
 }

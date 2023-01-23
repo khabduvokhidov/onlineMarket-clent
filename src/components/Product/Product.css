@@ -1,8 +1,6 @@
 /* Product Order Start */
 .product__order {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: unset;
   gap: 20px;
   flex-wrap: wrap;
 }
@@ -16,10 +14,9 @@
 }
 
 .product__info {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
   flex-wrap: wrap;
+  gap: 20px;
 }
 
 .product__image,
@@ -97,7 +94,7 @@
 @media (max-width: 1024px) {
   .product__info,
   .product__form-box {
-    width: unset;
+    width: 100%;
   }
 }
 

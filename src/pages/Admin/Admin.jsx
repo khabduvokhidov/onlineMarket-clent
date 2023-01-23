@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import { signUp } from '../../api/registerRequest'
 import Operators from '../../components/Operators/Operators'
@@ -20,12 +22,14 @@ export default function Admin() {
     lastname: "",
     email: "",
     password: "",
-    confirmpass: "",
     role: "",
-    phone: ""
+    phone: "",
+    confirmpass: "",
   }
 
-  const { setUser, loading, setLoading } = useInfoContext()
+  const navigate = useNavigate()
+
+  const { productLoading, setProductLoading, loading, setLoading } = useInfoContext()
 
   const [confirmPass, setConfirmPass] = useState(true)
 
@@ -38,20 +42,13 @@ export default function Admin() {
     })
   }
 
-  //reset form
-  const resetForm = () => {
-    setData(initialState)
-    setConfirmPass(confirmPass)
-  }
-
   // sign up
   const signUpUser = async () => {
     try {
       setLoading(true)
-      const res = await signUp(data)
-      setUser(res.data.newUser)
-      console.log(res);
+      await signUp(data)
       showToastMessage()
+      await setProductLoading(!productLoading)
       resetForm()
       setLoading(false)
     } catch (error) {
@@ -61,22 +58,28 @@ export default function Admin() {
     }
   }
 
-  // handleInput
+  // handle input
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value })
   }
 
-  //handle submit form
+  // handle submit form
   const handleSubmitForm = async (e) => {
     setConfirmPass(true)
     e.preventDefault()
     try {
-      if (data.confirmpass === data.password ) {
-        return signUpUser
+      if (data.confirmpass === data.password) {
+        return signUpUser()
       }
     } catch (error) {
       toast.error(error.message)
     }
+  }
+
+  //reset form
+  const resetForm = () => {
+    setData(initialState)
+    setConfirmPass(confirmPass)
   }
 
   return (
@@ -155,7 +158,7 @@ export default function Admin() {
                     />
                   </label>
 
-                  <label className='tabs__label' htmlFor="signUpPassword">
+                  <label className='tabs__label' htmlFor="adminPassword">
                     Parolingiz:
                     <input
                       required
@@ -173,12 +176,13 @@ export default function Admin() {
                     </button>
                   </label>
 
-                  <label className='tabs__label' htmlFor="signUpPassword">
+                  <label className='tabs__label' htmlFor="adminConfirmPassword">
                     Parolingizni Tasdiqlnag:
                     <input
                       required
                       type={password ? "text" : "password"}
-                      name='confirmpass' id="signUpPassword"
+                      name='confirmpass'
+                      id="adminConfirmPassword"
                       placeholder='12345678'
                       className='tabs__input'
                       autoComplete='false'
@@ -220,7 +224,7 @@ export default function Admin() {
                   <button type="submit" className="tabs__btn" disabled={loading}>
                     {loading ? "Kuting..." : "Ro'yxatdan O'tish"}
                   </button>
-                
+
                 </form>
               </div>
 
@@ -229,7 +233,7 @@ export default function Admin() {
           </div>
         </div>
       </section>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <Operators />
     </>
   )

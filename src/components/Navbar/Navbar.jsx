@@ -30,32 +30,36 @@ export default function Navbar() {
             <ul className="nav__list dis-flex">
 
               <li className="nav__item">
-                <Link to="/" className="nav__link">Bosh Sahifa</Link>
+                <Link to="/" className="nav__link">bosh sahifa</Link>
               </li>
 
               <li className="nav__item">
-                <Link to="/products" className="nav__link">Mahsulotlar</Link>
+                <Link to="/products" className="nav__link">mahsulotlar</Link>
               </li>
 
               {
-                user?.role === "admin" &&
-                <>
-                  <li className="nav__item">
-                    <Link to="/saleshistory" className="nav__link">Sotilgan Mahsulotlar</Link>
-                  </li>
+                user?.role === "admin" || user?.role === "operator" ?
+                  <>
+                    <li className="nav__item">
+                      <Link to="/sales" className="nav__link">buyurtmalar</Link>
+                    </li>
 
-                  <li className="nav__item">
-                    <Link to="/orders" className="nav__link">Buyurtmalar</Link>
-                  </li>
+                    <li className="nav__item">
+                      <Link to="/acceptedorders" className="nav__link">qabul qilingan buyurtmalar</Link>
+                    </li>
 
-                  <li className="nav__item">
-                    <Link to="/acceptedorders" className="nav__link">Qabul Qilingan Buyurtmalar</Link>
-                  </li>
+                    <li className="nav__item">
+                      <Link to="/deliveredorders" className="nav__link">yetkazilgan mahsulotlar</Link>
+                    </li>
+                  </> : ""
+              }
 
+              {
+                user?.role === "admin" && (
                   <li className="nav__item">
-                    <Link to="/admin" className="nav__link">Admin</Link>
+                    <Link to="/admin" className="nav__link">admin</Link>
                   </li>
-                </>
+                )
               }
 
             </ul>
@@ -78,8 +82,6 @@ export default function Navbar() {
               {
                 user ? <h3 className="nav__firstname">{user.firstname}</h3> : <Link to="/register" className='nav__btn'>Ro'yxatdan O'tish</Link>
               }
-
-              {/* {user.role} */}
             </ul>
           </div>
         </div>

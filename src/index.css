@@ -1,13 +1,12 @@
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   background: rgba(6, 35, 62, 0.55);
   width: 8px;
-  /* display: none; */
 }
 
 *::-webkit-scrollbar-thumb {
   border-radius: 12px;
   background: rgb(187, 187, 187);
-}
+} */
 
 :root {
   --primary-color: #fff;
@@ -61,11 +60,58 @@ img {
   align-items: center;
 }
 
+.title,
+.error {
+  margin-bottom: 60px;
+  color: var(--secondary-color);
+  font-size: calc(24px + 24 * (100vw / 1920));
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.title__error {
+  color: red;
+}
+
+.error {
+  margin-bottom: unset;
+  color: red;
+}
+
+.cards {
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.del-btn {
+  border: 2px outset #e61b1b;
+  border-radius: 6px;
+  width: 100%;
+  padding: 12px 0;
+  color: #fff;
+  background: #e61b1b;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.del-btn:active {
+  border: 2px inset #e61b1b;
+}
+
+.bold-span {
+  font-weight: 700;
+}
+
 section {
   padding: 60px 0;
 }
 
-section:nth-of-type(odd) {
+section:nth-of-type(even) {
   background: rgb(250, 250, 250);
 }
 
@@ -74,6 +120,12 @@ section:nth-of-type(odd) {
 @media (max-width: 1024px) {
   section {
     padding: 40px 0;
+  }
+}
+@media (max-width: 768px) {
+  .title {
+    margin-bottom: 20px;
+    font-size: calc(24px + (24 + 24 * 0.7) * (100vw - 320px) / 1920);
   }
 }
 @media (max-width: 684px) {

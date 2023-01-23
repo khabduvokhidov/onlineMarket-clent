@@ -1,15 +1,21 @@
 /* Card Start */
+.card__item {
+  max-width: 320px;
+  width: 100%;
+}
+
 .card {
   border: 1px solid #f3f3f3;
   border-radius: 8px;
-  padding: 20px;
-  height: 520px;
+  padding: 15px;
+  max-width: 320px;
+  width: 100%;
   background: #fff;
   box-shadow: 0 0 4px 6px rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  transition: box-shadow 0.25s ease-in-out, transform 0.25s ease-in-out;
+  transition: all .3s ease-in-out
 }
 
 .card:hover {
@@ -106,19 +112,8 @@
   font-size: 16px;
 }
 
-.card__del-btn {
-  border: 2px outset #e61b1b;
-  border-radius: 6px;
-  width: 100%;
-  padding: 18px 0;
-  color: #fff;
-  background: #e61b1b;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.deleteDisabled {
-  border: 2px solid #e61b1b;
+/* .deleteDisabled {
+  border: 2px outset grey;
   border-radius: 6px;
   width: 100%;
   padding: 18px 0;
@@ -126,11 +121,7 @@
   background: grey;
   text-transform: uppercase;
   cursor: pointer;
-}
-
-.card__del-btn:active {
-  border: 2px inset #e61b1b;
-}
+} */
 
 .card__operator {
   border: 1px solid #f3f3f3;
@@ -144,6 +135,4 @@
 .operator__span {
   font-weight: 400;
 }
-
-
 /* Card End */

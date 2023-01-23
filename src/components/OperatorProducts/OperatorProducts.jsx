@@ -1,72 +1,98 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 
 import { deleteProducts } from '../../api/productRequest'
+import { deleteSalesHistory } from '../../api/salesHistory'
 import { useInfoContext } from '../../context/InfoContext'
 
 import "./OperatorProducts.css"
 
 export default function OperatorProducts() {
-  const { user, products, setProductLoading, productLoading, loading, setLoading } = useInfoContext()
-  const params = useParams()
+  const { serverPublic, user, products, setProductLoading, productLoading, loading, setLoading } = useInfoContext()
+  // const params = useParams()
+  const { operatorId } = useParams()
+
+  const [data, setData] = useState({
+    orders: null,
+    error: null
+  })
+
+  useEffect(() => {
+    ; (async () => {
+      try {
+        setData({ ...data, isLoading: true })
+
+        const API = axios.create({ baseURL: "https://onlinemarket.onrender.com/" })
+
+        API.interceptors.request.use((req) => {
+          if (localStorage.getItem("token")) {
+            req.headers.token = localStorage.getItem("token")
+          }
+
+          return req
+        })
+
+        const res = await API.get(`salesHis/saleshstory/operators/${operatorId}`)
+
+        if (typeof res.data === "string") {
+          setData({ ...data, isLoading: false, orders: null })
+        } else {
+          setData({ ...data, isLoading: false, orders: res.data })
+        }
+
+      } catch (error) {
+        setData({ ...data, isLoading: false, orders: null, error: error })
+      }
+    })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serverPublic, operatorId, productLoading])
+
+  const showToastError = () => {
+    toast.error('"Sahifani yangilang!', {
+      position: toast.POSITION.TOP_RIGHT
+    })
+  }
 
   const deleteCard = async (e) => {
     try {
       setLoading(true)
-      const res = await deleteProducts(e.target.id)
+      const res = await deleteSalesHistory(e.target.id)
       await setProductLoading(!productLoading)
       toast.success(res.data.message)
       setLoading(false)
     } catch (error) {
       setLoading(false)
       console.log(error);
-      toast.error("Qaytadan urinib ko'ring(")
+      showToastError()
     }
   }
 
-  let filtredProduct = []
-
-  if (params.id) {
-    filtredProduct = products.filter((product) => product?.operatorId?._id === params.id)
-  }
   return (
     <>
       <section className="operatorProduct">
         <div className="container">
-          {
-            filtredProduct?.length > 0 ? (
-              <h2 className='operatorProduct__title'>operator qo'shgan mahsulotlari!!!</h2>
-            ) : (
-              <h1 className='operatorProduct__title title__error'>operator hali mahsulot qo'shmagan</h1>
-            )
-          }
-          <div className="operatorProduct__cards">
+          <h2 className='operatorProduct__title title'>operator sotgan mahsulotlar!!!</h2>
+          <div className="operatorProduct__cards cards">
             {
-              filtredProduct?.length > 0 && filtredProduct?.map((product, id) => {
+              data?.orders?.map((product, id) => {
                 return (
-                  <div className="operatorProduct__card" key={id}>
-                    <div className='operatorProduct__card__header'>
-                      <img className='operatorProduct__card--img' src={product?.image?.url} alt="photo" />
+                  <div className="operatorProduct__card card" key={id}>
+                    <div className="operatorProduct__card__body card__body">
+                      <p>Mahsulot narxi: <span className="bold-span">{product?.orderId?.price}</span> so'm</p>
+                      <p>Sotgan mahsulotining miqdori: <span className="bold-span">{product?.orderId?.count}</span> ta</p>
+                      <p>Operatorning ismi: <span className="bold-span">{product?.operatorId?.firstname} {product?.operatorId?.lastname}</span></p>
+                      <p>{product?.operatorId?.firstname}ning telefon raqami: <span className="bold-span">{product?.operatorId?.phone}</span></p>
+                      <p>{product?.operatorId?.firstname}ning e-maili: <span className="bold-span">{product?.operatorId?.email}</span></p>
                     </div>
-                    <div className="operatorProduct__card__body">
-                      <h3 className="operatorProduct__card--title">Mahsulot nomi: <span className="operatorProduct__span">{product.name}</span></h3>
-                      <span className="operatorProduct__card--span">Mahsulot narxi: {product.price}</span>
-                      <p className='operatorProduct__card--desc'>Mahsulot haqida: {product.desc}</p>
-                      <p className='operatorProduct__card--name'>Operator ism: <span className="operatorProduct__span">{product?.operatorId?.firstname} {product?.operatorId?.lastname}</span></p>
-                      <p className='operatorProduct__card--phone'>{product?.operatorId?.firstname}ning telefon raqami: <span className="operatorProduct__span">+998{product?.operatorId?.phone}</span></p>
-                      <p className='operatorProduct__card--mail'>{product?.operatorId?.firstname}ning elektron pochtasi: {product?.operatorId?.email}</p>
-
-                      <p className='operatorProduct__card--decision'>mahsulot sotilganmi yoki yoqmi</p>
-                    </div>
-                    <div className="operatorProduct__card__footer">
+                    <div className="operatorProduct__card__footer card__footer">
                       {
                         user?.role === "admin" &&
-                        <button disabled={loading} onClick={deleteCard} id={product._id} className="operatorProduct__del--btn">
+                        <button disabled={loading} onClick={deleteCard} id={product._id} className="del-btn">
                           Delete
                         </button>
                       }
-                      <Link to={`order/saleshistory/${product._id}`} className='operatorProduct__show--btn'>Ko'rish</Link>
                     </div>
                   </div>
                 )

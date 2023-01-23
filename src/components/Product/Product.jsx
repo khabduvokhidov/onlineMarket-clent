@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useRef } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
+
 import { addOrderProduct } from '../../api/orderRequest'
 import { useInfoContext } from '../../context/InfoContext'
 
@@ -9,12 +10,11 @@ import "./Product.css"
 export default function Product() {
   const { user, products, loading, setLoading } = useInfoContext()
   const params = useParams()
+  const navigate = useNavigate()
 
   const countRef = useRef()
   const cityRef = useRef();
   const districtRef = useRef();
-  
-  const addressRef = useRef();
 
   const addOrder = async (e) => {
     e.preventDefault()
@@ -26,7 +26,6 @@ export default function Product() {
       data.append("count", countRef.current.value)
       data.append("city", cityRef.current.value)
       data.append("district", districtRef.current.value)
-      data.append("address", addressRef.current.value)
 
       const res = await addOrderProduct(data)
       localStorage.setItem('Order Product', JSON.stringify(res.data.newOrder))
@@ -35,7 +34,7 @@ export default function Product() {
       setLoading(false)
     } catch (error) {
       setLoading(false)
-      toast.error(error.data.message);
+      toast.error(error);
     }
 
   }
@@ -48,7 +47,6 @@ export default function Product() {
   const resetShare = () => {
     countRef.current.value = "";
     districtRef.current.value = "";
-    addressRef.current.value = "";
     cityRef.current.value = "";
   }
 
@@ -59,17 +57,15 @@ export default function Product() {
           {
             filtredProduct?.map((product, id) => {
               return (
-                <div className="product__order" key={id}>
-                  <div className="product__info">
+                <div className="product__order dis-flex" key={id}>
+                  <div className="product__info dis-flex">
                     <div className="product__image">
                       <img className="product__img" src={product?.image?.url} alt="item" />
                     </div>
                     <div className="product__desc">
                       <h2 className="product__name">{product?.name}</h2>
-                      <span className="product__Price">{product?.price}</span>
+                      <span className="product__Price"><span className="bold-span">{product?.price}</span> so'm</span>
                       <p className="product__descr">{product?.desc}</p>
-                      <p className="product__user">Mahsulotni qo'shgan odam: <span className="product__span">{product?.operatorId?.firstname}</span></p>
-                      <p className="product__person">{product?.operatorId?.firstname}ning raqami: <span className="product__span">+998{product?.operatorId?.phone}</span></p>
                     </div>
                   </div>
 
@@ -101,19 +97,6 @@ export default function Product() {
                         />
                       </label>
 
-                      <label htmlFor="address" className="product__label">
-                        Yashash manzilingizni kiriting:
-                        <input
-                          required
-                          name="address"
-                          id="address"
-                          type="text"
-                          placeholder='Qora-Qamish 2/4'
-                          className='product__input'
-                          ref={addressRef}
-                        />
-                      </label>
-
                       <label htmlFor="count" className="product__label">
                         Mahsulotning miqdorini kiriting:
                         <input
@@ -122,6 +105,7 @@ export default function Product() {
                           id="count"
                           type="number"
                           placeholder='1'
+                          defaultValue="1"
                           className='product__input'
                           ref={countRef}
                         />

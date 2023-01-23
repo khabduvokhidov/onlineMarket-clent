@@ -10,7 +10,7 @@ export default function Footer() {
       <footer className="footer">
         <div className="container">
           <div className="footer__info dis-flex">
-            <Link to="/" className='footer__link'>Afruza-Shop</Link>
+            <Link to="/" className='footer__logo'>Afruza-Shop</Link>
             <p className="footer__txt">&copy; Created By Abdurahmon And Bilol. 2022</p>
             <a href="#" className="footer__contact">
               Admin <FontAwesomeIcon icon={faPhoneFlip} className="footer__icon" />

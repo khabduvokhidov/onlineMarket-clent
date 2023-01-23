@@ -1,21 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
-import "./Card.css";
-import { useInfoContext } from "../../context/InfoContext";
 import { deleteProducts } from "../../api/productRequest";
+import { useInfoContext } from "../../context/InfoContext";
+
+import "./Card.css";
 
 function Card({ data }) {
   const params = useParams()
 
-  const {
-    user,
-    loading,
-    setLoading,
-    productLoading,
-    setProductLoading
-  } = useInfoContext()
+  const { user, loading, setLoading, productLoading, setProductLoading } = useInfoContext()
 
   const showToastMessage = () => {
     toast.success("Mahsulot o'chirildi!", {
@@ -24,7 +19,7 @@ function Card({ data }) {
   }
 
   const showToastError = () => {
-    toast.error("Qaytadan urinib ko'ring!", {
+    toast.error("Sahifani yangilang!", {
       position: toast.POSITION.TOP_RIGHT
     });
   }
@@ -36,20 +31,19 @@ function Card({ data }) {
         return params.id === data._id
       }
       await deleteProducts(data._id)
+      await setProductLoading(!productLoading)
       showToastMessage()
       setLoading(false)
-      setProductLoading(!productLoading)
     } catch (error) {
       setLoading(false)
       console.log(error);
-      alert("Sahifani yangilang!")
-      // showToastError()
+      showToastError()
     }
   }
 
   return (
     <>
-      <div className="product__box">
+      <div className="card__item">
         <div className="card">
           <div className="card__header">
 
@@ -63,7 +57,7 @@ function Card({ data }) {
 
             <div className="card__price-box dis-flex">
               <span className="card__span">Narxi:</span>
-              <h3 className="card__price">{data?.price} UZS</h3>
+              <h3 className="card__price">{data?.price} so'm</h3>
             </div>
 
             <p className="card__desc">{data?.desc}</p>
@@ -72,16 +66,16 @@ function Card({ data }) {
 
           <div className="card__footer">
 
-            
-            
-          <Link to={`/product/products/one/${data?._id}`} className="card__btn">
-            Buyurtma Berish
-          </Link>
+
+
+            <Link to={`/product/products/one/${data?._id}`} className="card__btn">
+              Batafsil Ko'rish
+            </Link>
 
             {
               user?.role === "admin" &&
-              <button disabled={loading} onClick={deleteCard} id={data._id} className={"card__del-btn"}>
-                 Delete
+              <button disabled={loading} onClick={deleteCard} id={data._id} className={"card__del-btn del-btn"}>
+                Delete
               </button>
             }
 
@@ -94,15 +88,11 @@ function Card({ data }) {
               <h3 className="operator__name">
                 <span className="operator__span">Mahsulot Egasi</span> {data?.operatorId?.firstname}
               </h3>
-              {/* {
-                user?.role !== "admin" && ( */}
               <p className="operator__phone">+998{data?.operatorId?.phone}</p>
-              {/* )
-              } */}
             </div>
           )
         }
-        <ToastContainer />
+        {/* <ToastContainer /> */}
       </div>
     </>
   );

@@ -1,23 +1,5 @@
 /* Operator Start */
-.operators__cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.operators__card {
-  border: 1px solid #f3f3f3;
-  border-radius: 8px;
-  padding: 20px;
-  height: 450px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  box-shadow: 0 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
 .operator__header {
-  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -29,34 +11,21 @@
   font-size: 200px;
 }
 
-.operator__btn,
-.operator__del-btn {
+.operator__btn {
+  border: 2px outset var(--secondary-color);
   border-radius: 6px;
+  margin-bottom: 8px;
+  padding: 8px 0;
   width: 100%;
-  padding: 12px 0;
   color: #fff;
+  background: var(--secondary-color);
+  display: block;
+  font-size: 14px;
   text-align: center;
   cursor: pointer;
 }
 
 .operator__btn:active {
   border: 2px inset var(--secondary-color);
-}
-
-.operator__btn {
-  border: 2px outset var(--secondary-color);
-  margin: 10px 0;
-  display: block;
-  background: var(--secondary-color);
-}
-
-.operator__del-btn {
-  border: 2px outset #e61b1b;
-  background: #e61b1b;
-  text-transform: uppercase;
-}
-
-.operator__del-btn:active {
-  border: 2px inset #e61b1b;
 }
 /* Operator End */

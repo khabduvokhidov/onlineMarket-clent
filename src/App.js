@@ -13,6 +13,9 @@ import Home from "./pages/Home/Home"
 import Products from "./pages/Products/Products"
 import Register from "./pages/Register/Register"
 import OrderProduct from "./components/OrderProduct/OrderProduct"
+import DeliveredOrders from "./pages/DeliveredOrders/DeliveredOrders"
+import AcceptedOrders from "./pages/AcceptedOrders/AcceptedOrders"
+import SalesOne from "./components/SalesOne/SalesOne"
 
 function App() {
   const { user } = useInfoContext()
@@ -22,21 +25,30 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-            <Route path="/" element={ <Home /> } />
-            <Route path="/register" element={ <Register /> } />
-            
-            {/* <Route path="/products" element={ <Products /> } /> */}
-            
-            <Route path="/products/product/products/one/:id" element={ <Products /> } />
-            
-            <Route path="product/products/one/:id" element={user ? <Product /> : <Navigate to="/register" /> } />
-            <Route path="admin/product/products/:id" element={user ?  <OperatorProducts /> : <Navigate to="/register"/> } />
-            <Route path="/admin" element={user?.role === "admin" && <Admin /> /* : <h2 className="error">Sizda Bu Yerga Kirish Huquqi Yo'q</h2> */ } />
-            <Route path="admin/product/products/:id/order/saleshistory/:id" element={user ? <OrderProduct /> : <Navigate to="/register" /> } />
-            <Route path="/saleshistory" element={user?.role === "admin" && <SalesHistory /> /* : <h2 className="error">Sizda Bu Yerga Kirish Huquqi Yo'q</h2> */ } />
+          <Route path="/" element={ <Home /> } />
+
+          <Route path="/register" element={ <Register /> } />
+
+          <Route path="/products" element={ <Products /> } />
+
+          <Route path="product/products/one/:id" element={ user ? <Product /> : <Navigate to="/register" /> } />
+
+          <Route path="admin/salesHis/saleshstory/operators/:operatorId" element={ user ? <OperatorProducts /> : <Navigate to="/register"/> } />
+
+          <Route path="/admin" element={ user?.role === "admin" && <Admin /> } />
+
+          <Route path="admin/product/products/:id/order/sales/:id" element={ user ? <OrderProduct /> : <Navigate to="/register" /> } />
+
+          <Route path="/sales" element={ user?.role === "admin" || user?.role === "operator" ? <SalesHistory /> : <h2 className="error">Sizda Bu Yerga Kirish Huquqi Yo'q</h2> } />
+
+          <Route path="/salesHis/newsales/one/:orderId" element={ user?.role === "admin" || user?.role === "operator" ? <SalesOne /> : <h2 className="error">Sizda Bu Yerga Kirish Huquqi Yo'q</h2> } />
+
+          <Route path="/acceptedorders" element={ user?.role === "admin" || user?.role === "operator" ? <AcceptedOrders /> : <h2 className="error">Sizda Bu Yerga Kirish Huquqi Yo'q</h2> } />
+
+          <Route path="/deliveredorders" element={ <DeliveredOrders /> } />
         </Routes>
         <Footer />
-        </Router>
+      </Router>
     </>
   );
 }

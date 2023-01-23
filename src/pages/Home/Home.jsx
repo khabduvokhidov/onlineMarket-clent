@@ -10,11 +10,9 @@ import Card from '../../components/Card/Card';
 import './Home.css';
 
 import Fridge from '../../img/fridge.jpg';
-import Gaz from '../../img/plita.jpg';
-import { Button, Group, Modal } from '@mantine/core';
+import Gaz from '../../img/bitavoy.jpg';
+import makeUp from '../../img/makeUp2.webp';
 import { useInfoContext } from '../../context/InfoContext';
-import { toast } from 'react-toastify';
-import { addProduct } from '../../api/productRequest';
 
 export default function Home() {
   const settings = {
@@ -35,7 +33,7 @@ export default function Home() {
     speed: 1000,
     slidesToShow: 4,
     slidesToScroll: 1,
-    initialSlide: 0,
+    initialSlide: 2,
     cssEase: "linear",
     responsive: [
       {
@@ -95,43 +93,6 @@ export default function Home() {
     setToBase(file);
   }
 
-  // const showToastMessage = () => {
-  //   toast.success("Mahsulot Qo'shildi!", {
-  //     position: toast.POSITION.TOP_RIGHT
-  //   });
-  // };
-
-  // const showToastError = () => {
-  //   toast.error("Qaytadan Urinib Ko'ring!", {
-  //     position: toast.POSITION.TOP_RIGHT
-  //   })
-  // }
-
-  // const addProducts = async (e) => {
-  //   e.preventDefault()
-  //   try {
-  //     if (user.role === "operator" || user.role === "admin") {
-  //       setLoading(true)
-  //       const data = new FormData()
-  //       data.append("name", nameRef.current.value)
-  //       data.append("price", priceRef.current.value)
-  //       data.append("desc", descRef.current.value)
-  //       data.append("image", imageRef.current.files[0])
-  //       data.append("operatorId", user.id)
-
-  //       await addProduct(data)
-  //       resetShare();
-  //       setProductLoading(!productLoading)
-  //       setLoading(false)
-  //       return showToastMessage()
-  //     }
-  //   } catch (error) {
-  //     setLoading(false)
-  //     showToastError()
-  //     console.log(error);
-  //   }
-  // }
-
   const resetShare = () => {
     nameRef.current.value = "";
     priceRef.current.value = "";
@@ -159,20 +120,20 @@ export default function Home() {
             </div>
 
             <div className="slider__content">
-              <img src={Fridge} alt="" className="slider__img" />
+              <img src={makeUp} alt=""  className="slider__img" />
             </div>
 
             <div className="slider__content">
-              <img src={Fridge} alt="" className="slider__img" />
+              <img src={Gaz} alt="" className="slider__img" />
             </div>
           </Slider>
         </div>
       </section>
       <section className="items">
         <div className="container">
-          <h2 className="items__title">Mahsulotlar</h2>
+          <h2 className="items__title title">mahsulotlar</h2>
 
-          <div className="cards">
+          <div className="items__cards">
             <Slider {...cardSettings}>
               {
                 filteredProducts?.map((product, id) => (
@@ -197,9 +158,9 @@ export default function Home() {
             </div>
 
             <div className="about__desc">
-              <h2 className="about__title">Saytimiz haqida</h2>
+              <h2 className="about__title title">Saytimiz haqida</h2>
 
-              <p className="about__txt">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum repellendus doloribus iure quia hic blanditiis facilis odit tempore, provident deserunt officia consequuntur nulla vitae possimus ratione esse recusandae repudiandae odio in laboriosam ab, architecto quod. Quis, odio perspiciatis aspernatur iure veniam dolores officiis sunt ut! Sapiente nesciunt nemo explicabo deleniti!</p>
+              <p className="about__txt">Assalomu aleykum! Bizning <span className="bold-span">Afruza-Shop</span> saytimizda siz mahsulotlarni uyda o'tirib onlayn buyurtma berishingiz mumkin. O'zingizga yoqqan mahsulotni tanlab, shahar va manzilingizni kiritishingiz kerak. Manzilingizni kiritganingizdan so'ng siz bilan biznig operatorlarimizdan biri bog'lanib, sizga mahsulotni jo'natib yuboradi va siz mahsulotni qabul qilib olishingiz mumkin. Agar qandaydir savollaringiz bo'lsa sayt admini bilan bog'lanishingiz mumkin. Sizlarga yaxshi xaridlarni tilab qolamiz{")"}</p>
             </div>
 
           </div>

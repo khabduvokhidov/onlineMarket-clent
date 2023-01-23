@@ -1,33 +1,16 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState
-} from 'react'
-import {
-  getAllProducts
-} from '../api/productRequest'
-import {
-  getSalesHis
-} from '../api/orderRequest'
-import {
-  getOperators
-} from '../api/userRequest'
-import {
-  getAllOrders,
-  getByIOperatorId,
-  salesSoltOutAll
-} from '../api/salesHistory'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { getAllProducts } from '../api/productRequest'
+import { getSalesHis } from '../api/orderRequest'
+import { getOperators } from '../api/userRequest'
+import { getAllOrders, getByIOperatorId, salesSoltOutAll } from '../api/salesHistory'
 
 
 const InfoContext = createContext()
 
 export const useInfoContext = () => useContext(InfoContext)
 
-const InfoContextProvider = ({
-  children
-}) => {
-  const serverPublic = "http://localhost:4001/"
+const InfoContextProvider = ({ children }) => {
+  const serverPublic = "https://onlinemarket.onrender.com/"
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")) || null)
 
