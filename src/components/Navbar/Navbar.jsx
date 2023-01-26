@@ -1,32 +1,26 @@
-import React, { useState } from 'react'
+import React, { useRef } from "react";
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPhoneFlip } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faBarsStaggered, faPhoneFlip } from '@fortawesome/free-solid-svg-icons'
 
 import "./Navbar.css"
-import { useInfoContext } from '../../context/InfoContext'
+import { useInfoContext } from "../../context/InfoContext"
 
-export default function Navbar() {
-  const [openMenu, setOpenMenu] = useState(false)
+function Navbar() {
+  const navRef = useRef();
+
+  const showNavbar = () => {
+    navRef.current.classList.toggle("responsive__nav");
+  };
+
   const { user, setUser } = useInfoContext()
 
-  const clickMenu = () => {
-    setOpenMenu(!openMenu)
-  }
-
   return (
-    <>
-      <nav className="nav">
-        <div className="container dis-flex nav__container">
-
-          <Link to="/" className="nav__logo">Afruza-Shop</Link>
-
-          <div className={openMenu ? "nav__burger active" : "nav__burger"} onClick={clickMenu}>
-            <span className="nav__burger-line"></span>
-          </div>
-
+    <div className="nav">
+      <div className="container nav__container dis-flex">
+        <Link to="/" className="nav__logo">Afruza-Shop</Link>
+        <nav className="navbar" ref={navRef}>
           <div className="nav__menu dis-flex">
-
             <ul className="nav__list dis-flex">
 
               <li className="nav__item">
@@ -84,8 +78,18 @@ export default function Navbar() {
               }
             </ul>
           </div>
-        </div>
-      </nav>
-    </>
-  )
+          <button
+            className="nav__button nav__close__button"
+            onClick={showNavbar}>
+            <FontAwesomeIcon icon={faTimes} className="nav__icon" />
+          </button>
+        </nav>
+        <button className="nav__button" onClick={showNavbar}>
+          <FontAwesomeIcon icon={faBarsStaggered} className="nav__icon" />
+        </button>
+      </div>
+    </div>
+  );
 }
+
+export default Navbar;

@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import { useInfoContext } from "./context/InfoContext"
 
 import Footer from "./components/Footer/Footer"
-import Navbar from "./components/Navbar/Navbar"
 import OperatorProducts from "./components/OperatorProducts/OperatorProducts"
 import Product from "./components/Product/Product"
 import SalesHistory from "./components/SalesHistory/SalesHistory"
@@ -16,6 +15,7 @@ import OrderProduct from "./components/OrderProduct/OrderProduct"
 import DeliveredOrders from "./pages/DeliveredOrders/DeliveredOrders"
 import AcceptedOrders from "./pages/AcceptedOrders/AcceptedOrders"
 import SalesOne from "./components/SalesOne/SalesOne"
+import Navbar from "./components/Navbar/Navbar"
 
 function App() {
   const { user } = useInfoContext()
@@ -38,7 +38,7 @@ function App() {
           <Route path="/admin" element={ user?.role === "admin" && <Admin /> } />
 
           <Route path="admin/product/products/:id/order/sales/:id" element={ user ? <OrderProduct /> : <Navigate to="/register" /> } />
-
+    
           <Route path="/sales" element={ user?.role === "admin" || user?.role === "operator" ? <SalesHistory /> : <h2 className="error">Sizda Bu Yerga Kirish Huquqi Yo'q</h2> } />
 
           <Route path="/salesHis/newsales/one/:orderId" element={ user?.role === "admin" || user?.role === "operator" ? <SalesOne /> : <h2 className="error">Sizda Bu Yerga Kirish Huquqi Yo'q</h2> } />

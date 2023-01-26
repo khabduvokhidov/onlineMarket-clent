@@ -120,7 +120,7 @@ export default function Home() {
             </div>
 
             <div className="slider__content">
-              <img src={makeUp} alt=""  className="slider__img" />
+              <img src={makeUp} alt="" className="slider__img" />
             </div>
 
             <div className="slider__content">
@@ -133,7 +133,23 @@ export default function Home() {
         <div className="container">
           <h2 className="items__title title">mahsulotlar</h2>
 
-          <div className="items__cards">
+          <div className="items__cards"
+            style={
+              user?.role === "admin" ?
+                (
+                  filteredProducts?.length > 4 ? (
+                    { height: "unset", overflowY: "unset" }
+                  ) : (
+                    { height: "680px", overflowY: "hidden" }
+                  )
+                ) : (
+                  filteredProducts?.length > 4 ? (
+                    { height: "unset", overflowY: "unset" }
+                  ) : (
+                    { height: "550px", overflowY: "hidden" }
+                  )
+                )
+            }>
             <Slider {...cardSettings}>
               {
                 filteredProducts?.map((product, id) => (

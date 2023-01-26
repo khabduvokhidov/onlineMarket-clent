@@ -83,8 +83,18 @@
 }
 
 .card__desc {
-  height: 42px;
+  height: 44px;
   overflow: auto;
+}
+
+.card__desc::-webkit-scrollbar {
+  width: 2px;
+  background: #fff;
+}
+
+.card__desc::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #b1b1b1;
 }
 
 .card__btn {

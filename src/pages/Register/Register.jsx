@@ -200,12 +200,13 @@ export default function Register() {
                     </button>
                   </label>
 
-                  <label className='tabs__label' htmlFor="signUpPassword">
+                  <label className='tabs__label' htmlFor="signUpConfirmPassword">
                     Parolingizni Tasdiqlnag:
                     <input
                       required
                       type={password ? "text" : "password"}
-                      name='confirmpass' id="signUpPassword"
+                      name='confirmpass'
+                      id="signUpConfirmPassword"
                       placeholder='12345678'
                       className='tabs__input'
                       autoComplete='false'

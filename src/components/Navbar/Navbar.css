@@ -20,7 +20,7 @@
 }
 
 .nav__menu {
-  gap: 50px;
+  gap: 30px;
   justify-content: space-between;
 }
 
@@ -67,98 +67,68 @@
   border-radius: 4px;
   padding: 8px 16px;
 }
+
+.nav__button {
+  border: none;
+  outline: none;
+  background: transparent;
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 24px;
+}
 /* Navbar End */
 
-.mantine-qo1k2 {
-  height: unset;
-}
 
 /* Media Start */
 @media (max-width: 1024px) {
-  .nav__burger {
-    width: 50px;
-    height: 50px;
-    display: grid;
-    place-items: center;
-    visibility: visible;
-    cursor: pointer;
-    z-index: 9;
-  }
-  
-  .nav__burger-line {
+  .navbar {
     width: 100%;
-    height: 1.5px;
-    background: #fff;
-    position: relative;
-    transition: .5s;
-  }
-  
-  .nav__burger-line::before,
-  .nav__burger-line::after {
-    content: '';
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    position: absolute;
-    left: 0;
-    transition: .5s;
-  }
-  
-  .nav__burger-line::before {
-    top: -10px;
-  }
-  
-  .nav__burger-line::after {
-    top: 10px;
-  }
-  
-  .nav__burger.active .nav__burger-line {
-    background: transparent;
-  }
-  
-  .nav__burger.active .nav__burger-line::before {
-    transform: rotate(42deg) translateY(13px);
-  }
-  
-  .nav__burger.active .nav__burger-line::after {
-    transform: rotate(-42deg) translateY(-13px);
-  }
-  
-  .nav__menu {
-    border-left: 2px solid #fff;
-    width: max-content;
     height: 100vh;
-    padding: 0 20px;
-    background: rgba(6, 35, 62, 0.55);
-    justify-content: center;
-    gap: 30px;
-    position: absolute;
+    gap: 1.5rem;
+    background: rgb(6, 35, 62);
+    position: fixed;
     top: 0;
-    right: 0;
-    transform: translateX(100%);
-    visibility: hidden;
-    transition: .5s;
+    left: 0;
+    transform: translateY(-100vh);
+    transition: .75s;
   }
-  
+
+  .responsive__nav {
+    transform: none;
+  }
+
+  .nav__menu {
+    height: 100%;
+    justify-content: center;
+  }
+
   .nav__list,
   .nav__contacts,
   .nav__menu {
     flex-direction: column;
   }
-  
-  .nav__burger.active ~ .nav__menu {
+
+  .nav__button {
+    display: block;
     visibility: visible;
-    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .nav__close__button {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
   }
 }
-
 @media (max-width: 992px) {
   .nav__link,
   .nav__icon,
   .nav__btn {
     font-size: 18px;
   }
-  
+
   .nav__btn {
     padding: 6px 12px;
   }

@@ -27,11 +27,6 @@
   margin: 0 10px;
 }
 
-.items__cards {
-  height: 550px;
-  overflow-y: hidden;
-}
-
 .items__link {
   border: 1px solid;
   border-radius: 8px;

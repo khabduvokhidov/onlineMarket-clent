@@ -102,13 +102,13 @@ export default function Admin() {
 
                 <form className="tabs__form" onSubmit={handleSubmitForm}>
 
-                  <label className='tabs__label' htmlFor="name">
+                  <label className='tabs__label' htmlFor="firstname">
                     Ism:
                     <input
                       required
                       type="text"
                       name="firstname"
-                      id="name"
+                      id="firstname"
                       placeholder="Abdurahmon"
                       className='tabs__input'
                       value={data.firstname}
@@ -116,13 +116,13 @@ export default function Admin() {
                     />
                   </label>
 
-                  <label className='tabs__label' htmlFor="surname">
+                  <label className='tabs__label' htmlFor="lastname">
                     Familiya:
                     <input
                       required
                       type="text"
                       name="lastname"
-                      id="surname"
+                      id="lastname"
                       placeholder="Sobirjonov"
                       className='tabs__input'
                       value={data.lastname}
@@ -130,13 +130,13 @@ export default function Admin() {
                     />
                   </label>
 
-                  <label className='tabs__label' htmlFor="phone">
+                  <label className='tabs__label' htmlFor="userPhone">
                     Nomeringizni kiriting:
                     <input
                       required
                       type="number"
                       name='phone'
-                      id="phone"
+                      id="userPhone"
                       placeholder='99 878 12 12'
                       className='tabs__input'
                       value={data.phone}
@@ -144,13 +144,13 @@ export default function Admin() {
                     />
                   </label>
 
-                  <label className='tabs__label' htmlFor="signUpEmail">
+                  <label className='tabs__label' htmlFor="adminEmail">
                     E-mail Kiriting:
                     <input
                       required
                       type="email"
                       name='email'
-                      id="signUpEmail"
+                      id="adminEmail"
                       placeholder='username24@gmail.com'
                       className='tabs__input'
                       value={data.email}

@@ -37,7 +37,6 @@ const InfoContextProvider = ({ children }) => {
       } = await getAllProducts()
       setProducts(data)
     })()
-
   }, [user, productLoading])
 
   // get order product
@@ -80,7 +79,6 @@ const InfoContextProvider = ({ children }) => {
       } = await salesSoltOutAll()
       setDelivered(data)
     })()
-
   }, [user, productLoading])
 
 
