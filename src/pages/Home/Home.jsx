@@ -135,13 +135,19 @@ export default function Home() {
 
           <div className="items__cards"
             style={
-              user?.role === "admin" ?
-                (
+              user?.role === "admin" ? (
+                filteredProducts?.length === 0 ? (
+                  { height: "unset", overflowY: "unset" }
+                ) : (
                   filteredProducts?.length > 4 ? (
                     { height: "unset", overflowY: "unset" }
                   ) : (
                     { height: "680px", overflowY: "hidden" }
                   )
+                )
+              ) : (
+                filteredProducts?.length === 0 ? (
+                  { height: "unset", overflowY: "unset" }
                 ) : (
                   filteredProducts?.length > 4 ? (
                     { height: "unset", overflowY: "unset" }
@@ -149,6 +155,7 @@ export default function Home() {
                     { height: "550px", overflowY: "hidden" }
                   )
                 )
+              )
             }>
             <Slider {...cardSettings}>
               {
