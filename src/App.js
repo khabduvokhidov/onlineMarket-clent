@@ -31,7 +31,7 @@ function App() {
 
           <Route path="/products" element={ <Products /> } />
 
-          <Route path="product/products/one/:id" element={ user ? <Product /> : <Navigate to="/register" /> } />
+          <Route path="product/products/one/:id" element={ <Product />  } />
 
           <Route path="admin/salesHis/saleshstory/operators/:operatorId" element={ user ? <OperatorProducts /> : <Navigate to="/register"/> } />
 

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 
 import { addOrderProduct } from '../../api/orderRequest'
@@ -19,6 +19,7 @@ export default function Product() {
   const addOrder = async (e) => {
     e.preventDefault()
     try {
+      if(user){
       setLoading(true)
       const data = new FormData()
       data.append("productId", params.id)
@@ -32,6 +33,9 @@ export default function Product() {
       toast.success(res.data.message)
       resetShare()
       setLoading(false)
+      }else{
+        navigate("/register")
+      }
     } catch (error) {
       setLoading(false)
       toast.error(error);
@@ -111,7 +115,7 @@ export default function Product() {
                         />
                       </label>
 
-                      <button className="product__btn" type='submit'>Xarid qilish</button>
+                      <button className="product__btn" type='submit'>xarid qilish </button>
                     </form>
                   </div>
                 </div>
